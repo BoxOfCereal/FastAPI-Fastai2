@@ -28,7 +28,7 @@ app.add_middleware(
 
 path = Path(__file__).parent
 # REPLACE THIS WITH YOUR URL
-export_url = "https://www.dropbox.com/s/bjxz661vinhjqlc/export.pkl?dl=1"
+export_url = "<your link to your model>"
 export_file_name = 'export.pkl'
 
 
