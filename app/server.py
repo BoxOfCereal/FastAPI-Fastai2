@@ -1,18 +1,34 @@
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from fastai2.vision.all import *
+from fastai.vision.all import *
 import uvicorn
 import asyncio
 import aiohttp
 import aiofiles
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
+
+origins = [
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 path = Path(__file__).parent
 # REPLACE THIS WITH YOUR URL
-export_url = "url"
+export_url = "https://www.dropbox.com/s/bjxz661vinhjqlc/export.pkl?dl=1"
 export_file_name = 'export.pkl'
 
 
@@ -64,4 +80,4 @@ async def analyze(file: bytes = File(...)):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=80)
